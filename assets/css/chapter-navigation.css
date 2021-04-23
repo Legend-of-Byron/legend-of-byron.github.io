@@ -1,0 +1,22 @@
+#chapter-navigation {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#chapter-navigation #chapter-controls {
+    display: flex;
+    flex-direction: row;
+}
+
+#chapter-navigation #chapter-controls li {
+    width: 33.33vw;
+    text-align: center;
+}
+
+#chapter-navigation #chapter-controls button {
+    width: 100%;
+}
