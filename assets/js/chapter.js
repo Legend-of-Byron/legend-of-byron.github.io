@@ -1,5 +1,5 @@
 const loadChapterContent = async (key) => {
-    const chapterResponse = await fetch(`${document.location}/chapters/${key}`);
+    const chapterResponse = await fetch(`${document.location}chapters/${key}.html`);
     return await chapterResponse.text();
 }
 
@@ -8,10 +8,17 @@ const createChapterContent = (content) => {
     chapterContainer.innerHTML = content;
 }
 
+const createDateElement = dateString => {
+    const publishedAt = new Date(dateString);
+    const timeSincePublishedInWords = dateFns.distanceInWords(publishedAt, new Date());
+    const dateFormatted = dateFns.format(publishedAt, 'DD/MM/YYYY');
+    return `<span title="${dateFormatted}">${timeSincePublishedInWords}</span>`;
+}
+
 const createChapterLink = (chapter) => {
     const li = document.createElement('li');
     li.innerHTML = `
-        <span>${chapter.title}</span><span>${chapter.publishedAt}</span>
+        <span>${chapter.title}</span>${createDateElement(chapter.publishedAt)}
     `;
     li.addEventListener('click', () => onChapterLinkClick(chapter));
     return li;

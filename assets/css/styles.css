@@ -1,0 +1,82 @@
+:root {
+    --spacing-abs2: 2px;
+    --spacing-abs4: 4px;
+    --spacing-abs8: 8px;
+    --spacing-abs16: 16px;
+    --spacing-abs32: 32px;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    font-size: 2em;
+    font-weight: bolder;
+}
+
+h2 {
+    font-size: 1.5em;
+    font-weight: bolder;
+}
+
+h3 {
+    font-size: 1.17em;
+    font-weight: bolder;
+}
+
+h4 {
+    font-size: 1em;
+    font-weight: bolder;
+}
+
+h5 {
+    font-size: .83em;
+    font-weight: bolder;
+}
+
+h6 {
+    font-size: .67em;
+    font-weight: bolder;
+}
+
+/* NAV */
+
+body > nav {
+    width: 100%;
+}
+
+body > nav > ul {
+    display: flex;
+    flex-direction: column;
+}
+
+body > nav > ul > li {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/* HEADER */
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-top: var(--spacing-abs32);
+    margin-bottom: var(--spacing-abs32);
+}
+
+header > img {
+    max-height: 50px;
+    width: auto;
+    margin-right: var(--spacing-abs16);
+}
+
+/* MAIN */
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
