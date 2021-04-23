@@ -8,9 +8,39 @@
     <body>
         <header>
             <h1>Legend of Byron</h1>
+            <nav>
+                <ul id="chapters">
+
+                </ul>
+            </nav>
         </header>
         <main>
-            <p>Coming soon...</p>
+            <article id="chapter">
+
+            </article>
         </main>
+        <footer>
+
+        </footer>
+        <script>
+            const chapterMetadataLoader = async () => {
+                const baseUrl = document.location;
+                const res = await fetch(`${baseUrl}chapters.json`);
+                const chapters = await res.json();
+                const chaptersContainer = document.getElementById('chapters');
+                const chapterContainer = document.getElementById('chapter');
+                for(const chapter of chapters) {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <span>${chapter.title}</span><span>${chapter.publishedAt}</span>
+                    `;
+                    li.addEventListener('click', async () => {
+                        const chapterResponse = await fetch(`${baseUrl}/chapters/${chapter.key}`);
+                        chapterContainer.innerHTML = await chapterResponse.text();
+                    });
+                }
+            }
+            document.addEventListener("DOMContentLoaded", chapterMetadataLoader);
+        </script>
     </body>
 </html>
