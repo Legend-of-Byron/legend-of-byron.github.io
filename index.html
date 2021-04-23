@@ -38,6 +38,7 @@
                         const chapterResponse = await fetch(`${baseUrl}/chapters/${chapter.key}`);
                         chapterContainer.innerHTML = await chapterResponse.text();
                     });
+                    chaptersContainer.appendChild(li);
                 }
             }
             document.addEventListener("DOMContentLoaded", chapterMetadataLoader);
