@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 
 async function loadChaptersMetadata(): Promise<ChapterMetadata[]> {
-    const res = await fetch('./chapters/chapters.json');
+    const res = await fetch('./chapters.json');
     return await res.json();
 }
 
