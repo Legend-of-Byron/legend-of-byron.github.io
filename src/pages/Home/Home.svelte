@@ -4,6 +4,8 @@
     import { onMount } from "svelte";
 import { onDestroy } from "svelte/internal";
 import type { Unsubscriber } from "svelte/store";
+import NavBar from "../../components/NavBar.svelte";
+import { summary, title, version } from "../../constants";
 
     let chaptersMetadata: ChapterMetadata[] = [];
     let unsubscribe: Unsubscriber;
@@ -17,20 +19,11 @@ import type { Unsubscriber } from "svelte/store";
     onDestroy(() => {
         unsubscribe();
     });
-
-    const title = "Legend of Byron";
-    const summary = `
-        is a story set in the future of a young man named 
-        Byron as he goes on a journey of self discovery.
-    `;
 </script>
 
 <div id="container">
     <div>
-        <div id="meta">
-            <h1>{title}</h1>
-            <p>{summary}</p>
-        </div>
+        <NavBar title={title} summary={summary} version={version}/>
         <ChapterList chaptersMetada={chaptersMetadata}/>
     </div>
 </div>

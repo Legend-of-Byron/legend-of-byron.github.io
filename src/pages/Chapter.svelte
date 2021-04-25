@@ -1,5 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte';
+import NavBar from '../components/NavBar.svelte';
+import { title, version } from '../constants';
     export let params = { chapter: '' };
     let chapter: string;
 
@@ -13,6 +15,7 @@
     });
 </script>
 
+<NavBar title={title} version={version}/>
 
 <div contenteditable>
     {@html chapter}
