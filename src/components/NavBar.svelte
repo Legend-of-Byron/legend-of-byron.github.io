@@ -18,21 +18,23 @@
 
 <style>
     nav {
-        color: white;
-        background-color: rgba(0,0,0, 0.5);
+        color: black;
+        background-color: rgba(232, 216, 189, 0.8);
         display: flex;
         flex-direction: row;
         width: 100%;
         justify-content: center;
         align-items: baseline;
         flex-wrap: wrap;
-        position: relative
+        position: relative;
+        box-shadow: 0 0 8px black;
     }
     .brand {
         flex-grow: 1;
         text-align: center;
     }
     .version {
+        color: white;
         background-color: red;
         vertical-align: middle;
         padding: 4px;

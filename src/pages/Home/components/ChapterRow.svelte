@@ -16,21 +16,24 @@ import { onMount } from "svelte";
         };
     }
 
-    let publishedAtDistance: string;
-    let publishedAt: string;
+    const statusToDescription = {
+        wip: 'Work in progress: the author has not completed this chapter and is completely subject to change'
+    }
+
+    let createdAtDistance: string;
+    let createdAt: string;
 
     onMount(() => {
-        const dateParsed = parseDate(chapterMetadata.publishedAt);
-        console.log(dateParsed);
-        publishedAt = dateParsed.dateFormatted;
-        publishedAtDistance = dateParsed.timeSincePublishedInWords;
+        const dateParsed = parseDate(chapterMetadata.createdAt);
+        createdAt = dateParsed.dateFormatted;
+        createdAtDistance = dateParsed.timeSincePublishedInWords;
     });
 </script>
 
 <a class="chapter-metadata" href={`/chapters/${chapterMetadata.key}`} use:link>
-    <div>{index}</div>
-    <div>{chapterMetadata.title}</div>
-    <div title={publishedAt}>{publishedAtDistance} ago</div>
+    <div>#{index}</div>
+    <div title={statusToDescription[chapterMetadata.status]}>{chapterMetadata.title} ({chapterMetadata.status})</div>
+    <div title={createdAt}>{createdAtDistance} ago</div>
 </a>
 
 <style>

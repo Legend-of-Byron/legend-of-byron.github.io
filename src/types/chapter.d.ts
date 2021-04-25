@@ -1,5 +1,8 @@
 interface ChapterMetadata {
     key: string;
     title: string;
-    publishedAt: string;
+    createdAt: string;
+    updatedAt: string;
+    status: 'wip' | 'unstable' | 'stable',
+    url?: string;
 }

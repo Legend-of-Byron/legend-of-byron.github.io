@@ -2,10 +2,10 @@
     import ChapterList from "./components/ChapterList.svelte";
     import { chapterMetadataStore } from '../../stores';
     import { onMount } from "svelte";
-import { onDestroy } from "svelte/internal";
-import type { Unsubscriber } from "svelte/store";
-import NavBar from "../../components/NavBar.svelte";
-import { summary, title, version } from "../../constants";
+    import { onDestroy } from "svelte/internal";
+    import type { Unsubscriber } from "svelte/store";
+    import NavBar from "../../components/NavBar.svelte";
+    import { summary, title, version } from "../../constants";
 
     let chaptersMetadata: ChapterMetadata[] = [];
     let unsubscribe: Unsubscriber;
