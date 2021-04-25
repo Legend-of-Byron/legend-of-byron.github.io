@@ -36,6 +36,8 @@ import { onMount } from "svelte";
 <style>
     .chapter-metadata {
         display: flex;
+        width: 100%;
+        color: white;
     }
 
     .chapter-metadata > div:nth-child(2) {

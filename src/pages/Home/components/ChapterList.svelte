@@ -8,3 +8,10 @@
         <ChapterRow chapterMetadata={chapterMetadata} index={index}/>
     {/each}
 </div>
+
+<style>
+    div {
+        width: min(500px, 100vw);
+        margin: 16px 4px;
+    }
+</style>
