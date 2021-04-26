@@ -85,6 +85,7 @@ import { shouldReload } from './helpers';
     div#chapter {
         background-color: rgb(232, 216, 189);
         padding: 0 32px;
+        padding-bottom: 32px;
         border-radius: 5px;
         box-shadow: 0 0 16px black;
         min-height: 80vh;
