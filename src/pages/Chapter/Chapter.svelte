@@ -3,26 +3,31 @@
     import type { Unsubscriber } from 'svelte/store';
     import { chapterMetadataStore } from '../../stores';
     import { link } from 'svelte-spa-router';
-import Alert from '../../components/Alert.svelte';
-import App from '../../App.svelte';
-import { WIP_ALERET } from './constants';
-import { title } from '../../constants';
+    import Alert from '../../components/Alert.svelte';
+    import { WIP_ALERET } from './constants';
+import { shouldReload } from './helpers';
     export let params = { chapter: '' };
     let chapter: string;
-    let chapterMetadata: chapterMetadata | undefined;
+    let chapterMetadata: ChapterMetadata | undefined;
     async function loadChapter(): Promise<string> {
-        const res = await fetch(`./chapters/${params.chapter}.html`, {cache: 'force-cache'});
+        const cacheStrategy = shouldReload(chapterMetadata.key, new Date(chapterMetadata.updatedAt)) ? 'reload' : 'force-cache';
+        console.log(cacheStrategy);
+        const res = await fetch(`./chapters/${params.chapter}.html`, {cache: cacheStrategy});
         return await res.text();
     }
 
     $: cssVarStyles = '';
 
     let unsubscribe: Unsubscriber;
-    onMount(async () => {
-        chapter = await loadChapter();
-        unsubscribe = chapterMetadataStore.subscribe((({metadata, selectedIndex}) => {
-            chapterMetadata = metadata[selectedIndex]
+    onMount(() => {
+        unsubscribe = chapterMetadataStore.subscribe((async ({metadata, selectedIndex}) => {
+            if(metadata.length === 0) {
+                console.warn('Metadata unavailable');
+                return;
+            }
+            chapterMetadata = metadata[selectedIndex];
             cssVarStyles = `--background-image: url("${chapterMetadata.url}")`;
+            chapter = await loadChapter();
         }));
     });
 
