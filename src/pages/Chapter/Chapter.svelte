@@ -5,7 +5,8 @@
     import { link } from 'svelte-spa-router';
     import Alert from '../../components/Alert.svelte';
     import { WIP_ALERET } from './constants';
-import { shouldReload } from './helpers';
+    import { shouldReload } from './helpers';
+    import { RingLoader } from 'svelte-loading-spinners'
     export let params = { chapter: '' };
     let chapter: string;
     let chapterMetadata: ChapterMetadata | undefined;
@@ -39,13 +40,17 @@ import { shouldReload } from './helpers';
 <div id="container" style={cssVarStyles}>
     <a href="/" use:link>Legend of Byron</a>
     {#if chapterMetadata && chapterMetadata.status === 'wip'}
-    <div>
-        <Alert type={WIP_ALERET.type} title={WIP_ALERET.title} description={WIP_ALERET.description}/>
-    </div>
+        <div>
+            <Alert type={WIP_ALERET.type} title={WIP_ALERET.title} description={WIP_ALERET.description}/>
+        </div>
     {/if}
-    <div id="chapter">
-        {@html chapter}
-    </div>
+    {#if chapter}
+        <div id="chapter">
+            {@html chapter}
+        </div>
+    {:else}
+        <RingLoader size="128" color="rgb(232, 216, 189)" unit="px" duration="2s"></RingLoader>
+    {/if}
 </div>
 
 <style>
