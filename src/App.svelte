@@ -3,6 +3,7 @@
   import Home from './pages/Home/Home.svelte';
   import Chapter from './pages/Chapter/Chapter.svelte';
   import NotFound from './pages/NotFound.svelte';
+  import CookieBot from './components/CookieBot.svelte';
 
   const routes = {
     // Exact path
@@ -19,4 +20,5 @@
 
 <main>
 	<Router routes={routes}/>
+	<CookieBot />
 </main>
