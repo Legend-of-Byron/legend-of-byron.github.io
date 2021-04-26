@@ -12,7 +12,6 @@
     let chapterMetadata: ChapterMetadata | undefined;
     async function loadChapter(): Promise<string> {
         const cacheStrategy = shouldReload(chapterMetadata.key, new Date(chapterMetadata.updatedAt)) ? 'reload' : 'force-cache';
-        console.log(cacheStrategy);
         const res = await fetch(`./chapters/${params.chapter}.html`, {cache: cacheStrategy});
         return await res.text();
     }
