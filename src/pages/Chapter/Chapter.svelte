@@ -1,11 +1,15 @@
 <script lang="ts">
     import { onDestroy, onMount } from 'svelte';
-import type { Unsubscriber } from 'svelte/store';
-import { chapterMetadataStore } from '../stores';
+    import type { Unsubscriber } from 'svelte/store';
+    import { chapterMetadataStore } from '../../stores';
     import { link } from 'svelte-spa-router';
+import Alert from '../../components/Alert.svelte';
+import App from '../../App.svelte';
+import { WIP_ALERET } from './constants';
+import { title } from '../../constants';
     export let params = { chapter: '' };
     let chapter: string;
-
+    let chapterMetadata: chapterMetadata | undefined;
     async function loadChapter(): Promise<string> {
         const res = await fetch(`./chapters/${params.chapter}.html`, {cache: 'force-cache'});
         return await res.text();
@@ -17,8 +21,8 @@ import { chapterMetadataStore } from '../stores';
     onMount(async () => {
         chapter = await loadChapter();
         unsubscribe = chapterMetadataStore.subscribe((({metadata, selectedIndex}) => {
-            cssVarStyles = `--background-image: url("${metadata[selectedIndex].url}")`;
-            console.log(cssVarStyles)
+            chapterMetadata = metadata[selectedIndex]
+            cssVarStyles = `--background-image: url("${chapterMetadata.url}")`;
         }));
     });
 
@@ -29,7 +33,12 @@ import { chapterMetadataStore } from '../stores';
 
 <div id="container" style={cssVarStyles}>
     <a href="/" use:link>Legend of Byron</a>
+    {#if chapterMetadata && chapterMetadata.status === 'wip'}
     <div>
+        <Alert type={WIP_ALERET.type} title={WIP_ALERET.title} description={WIP_ALERET.description}/>
+    </div>
+    {/if}
+    <div id="chapter">
         {@html chapter}
     </div>
 </div>
@@ -48,7 +57,7 @@ import { chapterMetadataStore } from '../stores';
     }
     div#container {
         position: relative;
-        padding-top: 64px;
+        padding: 64px 0;
         display: flex;
         flex-direction: column;
         text-align: justify;
@@ -65,6 +74,10 @@ import { chapterMetadataStore } from '../stores';
 
     div#container > div {
         max-width: min(600px, 100vw);
+        box-sizing: border-box;
+    }
+
+    div#chapter {
         background-color: rgb(232, 216, 189);
         padding: 0 32px;
         border-radius: 5px;
